@@ -52,7 +52,11 @@ requires-python = ">=3.10"
 - `Review README.md setup and test instructions`
 
 ## Recent Commits
-- No recent file-specific commits found.
+- 96347e8 | Initial import: taspac CLI and examples. | Ruchir Kalokhe (tests/test_upload.py)
+- 96347e8 | Initial import: taspac CLI and examples. | Ruchir Kalokhe (app/upload.py)
+- 96347e8 | Initial import: taspac CLI and examples. | Ruchir Kalokhe (app/auth.py)
+- 96347e8 | Initial import: taspac CLI and examples. | Ruchir Kalokhe (README.md)
+- 96347e8 | Initial import: taspac CLI and examples. | Ruchir Kalokhe (pyproject.toml)
 
 ## Risks / Constraints
 - Authentication work can affect access control; verify negative and expired-token cases.

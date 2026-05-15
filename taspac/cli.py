@@ -41,7 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "generate":
-        packet = generate_packet(args.repo, args.task, args.output)
+        packet = generate_packet(args.repo, args.task, args.output, args.clone_timeout)
         if args.output:
             print(f"Wrote task packet to {args.output}")
         else:
@@ -67,12 +67,18 @@ def build_parser() -> argparse.ArgumentParser:
         "-o",
         help="Write markdown to a file instead of stdout",
     )
+    generate.add_argument(
+        "--clone-timeout",
+        type=int,
+        default=120,
+        help="Seconds to allow for cloning remote repositories",
+    )
     return parser
 
 
-def generate_packet(repo: str, task: str, output: str | None = None) -> str:
+def generate_packet(repo: str, task: str, output: str | None = None, clone_timeout: int = 120) -> str:
     with tempfile.TemporaryDirectory(prefix="taspac-") as tmp:
-        repo_path = prepare_repo(repo, Path(tmp))
+        repo_path = prepare_repo(repo, Path(tmp), clone_timeout)
         keywords = extract_keywords(task)
         files = list_repo_files(repo_path)
         matches = rank_files(repo_path, files, keywords)
@@ -87,13 +93,18 @@ def generate_packet(repo: str, task: str, output: str | None = None) -> str:
     return packet
 
 
-def prepare_repo(repo: str, tmp: Path) -> Path:
+def prepare_repo(repo: str, tmp: Path, clone_timeout: int) -> Path:
     candidate = Path(repo).expanduser()
     if candidate.exists():
         return candidate.resolve()
 
     target = tmp / "repo"
-    run(["git", "clone", "--depth", "50", repo, str(target)], Path.cwd(), check=True)
+    run(
+        ["git", "clone", "--depth", "50", repo, str(target)],
+        Path.cwd(),
+        check=True,
+        timeout=clone_timeout,
+    )
     return target
 
 
@@ -346,7 +357,12 @@ def dedupe(items: list[str]) -> list[str]:
     return result
 
 
-def run(args: list[str], cwd: Path, check: bool = False) -> subprocess.CompletedProcess[str]:
+def run(
+    args: list[str],
+    cwd: Path,
+    check: bool = False,
+    timeout: int = 10,
+) -> subprocess.CompletedProcess[str]:
     try:
         return subprocess.run(
             args,
@@ -355,7 +371,7 @@ def run(args: list[str], cwd: Path, check: bool = False) -> subprocess.Completed
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             check=check,
-            timeout=5,
+            timeout=timeout,
         )
     except FileNotFoundError as exc:
         if check:

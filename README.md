@@ -12,6 +12,15 @@ and it generates a structured markdown packet that gives AI coding agents useful
 taspac generate --repo https://github.com/example/repo --task "add JWT auth to upload endpoint"
 ```
 
+For slower networks or larger repositories, increase the clone timeout:
+
+```bash
+taspac generate \
+  --repo https://github.com/example/repo \
+  --task "add JWT auth to upload endpoint" \
+  --clone-timeout 300
+```
+
 ## Why This Exists
 
 AI coding tools are surprisingly capable once they understand the shape of a codebase.
