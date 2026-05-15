@@ -23,18 +23,30 @@ taspac generate \
 
 ## Why This Exists
 
-AI coding tools are surprisingly capable once they understand the shape of a codebase.
+Normally, when you give an AI coding agent a task, it starts with almost no context.
 
-The problem is that most tasks are underspecified. Developers repeatedly re-explain:
+You end up repeatedly explaining:
+
 - which files matter
+- what parts of the repo are related
 - what commands to run
-- what parts of the repo are risky
-- which patterns already exist
-- what should not break
+- existing patterns in the codebase
+- what could break if changed carelessly
 
-`taspac` is a deliberately small tool that closes part of that context gap.
+`taspac` automates that briefing process.
 
-Instead of building another chat UI or multi-agent system, it focuses on generating a sharp, repo-aware task packet that can be pasted directly into tools like Claude Code, Codex, Cursor, or Aider.
+It scans a repository and generates a structured task packet containing:
+
+- relevant files
+- nearby code snippets
+- useful commands
+- recent commits
+- risks and constraints
+- a focused implementation prompt
+
+The goal is to reduce the amount of repo exploration and context reconstruction an AI agent has to do before it can start making useful changes.
+
+`taspac` stays deliberately small: paste the packet into Claude Code, Codex, Cursor, Aider, or similar—no extra chat UI or multi-agent stack required.
 
 ## What It Produces
 
