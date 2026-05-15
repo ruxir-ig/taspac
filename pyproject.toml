@@ -1,0 +1,18 @@
+[project]
+name = "taspac"
+version = "0.1.0"
+description = "Agent-Ready Task Packet Generator"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "taspac contributors" }]
+dependencies = []
+
+[project.scripts]
+taspac = "taspac.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["taspac*"]
