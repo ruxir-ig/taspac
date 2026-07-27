@@ -62,7 +62,19 @@ The generated packet includes:
 
 ## Install
 
-From PyPI:
+With [uv](https://docs.astral.sh/uv/) (recommended for the CLI):
+
+```bash
+uv tool install taspac
+```
+
+That puts the `taspac` command on your PATH. One-off runs without installing:
+
+```bash
+uvx taspac generate --repo https://github.com/example/repo --task "add JWT auth to upload endpoint"
+```
+
+With pip:
 
 ```bash
 pip install taspac
@@ -72,6 +84,7 @@ From source (editable):
 
 ```bash
 python -m pip install -e .
+# or: uv pip install -e .
 ```
 
 You can also run without installing:
