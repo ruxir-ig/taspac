@@ -60,7 +60,15 @@ The generated packet includes:
 - Risks / Constraints
 - Agent Prompt
 
-## Install Locally
+## Install
+
+From PyPI:
+
+```bash
+pip install taspac
+```
+
+From source (editable):
 
 ```bash
 python -m pip install -e .

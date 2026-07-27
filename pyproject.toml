@@ -4,8 +4,38 @@ version = "0.1.0"
 description = "Agent-Ready Task Packet Generator"
 readme = "README.md"
 requires-python = ">=3.10"
-authors = [{ name = "taspac contributors" }]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Ruchir Kalokhe", email = "ruchirkalokhe@gmail.com" },
+]
+keywords = [
+    "ai",
+    "agents",
+    "cli",
+    "codegen",
+    "developer-tools",
+    "task-packet",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Utilities",
+]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/ruxir-ig/taspac"
+Repository = "https://github.com/ruxir-ig/taspac"
+Issues = "https://github.com/ruxir-ig/taspac/issues"
+Changelog = "https://github.com/ruxir-ig/taspac/releases"
 
 [project.scripts]
 taspac = "taspac.cli:main"
